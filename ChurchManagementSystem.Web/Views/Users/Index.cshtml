@@ -1,0 +1,123 @@
+﻿@using ChurchManagementSystem.Web.Services.Users
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using DataTables.AspNetCore.Mvc
+
+@using ChurchManagementSystem.Web.Services.Users.Models
+
+@model UsersOverviewSummaryViewModel;
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "_Layout";
+}
+
+@*<h4 class="font-weight-bold py-3 mb-0">Users</h4>
+    <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="#">Manage</a></li>
+            <li class="breadcrumb-item active">Users</li>
+        </ol>
+    </div>*@
+<div class="row">
+    <div class="tab-content col-12 pt-3">
+        <div class="card-header bg-dark text-white" style="padding:0.9em; border-radius: 5px 5px 0 0">
+            <text style="text-align:left">Users</text>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-xl-12">
+    <div class="nav-tabs-top">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" asp-controller="User" asp-action="Index">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="User" asp-action="Transaction">Transactions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="User" asp-action="Individual">Individual</a>
+            </li>
+            <li class="nav-item ml-auto" style="margin:auto !important">
+                <form>
+                    <i class="ion ion-md-search"></i> <input type="text" class="border-0" placeholder="Search User" id="searchbox" />
+                </form>
+            </li>
+        </ul>
+        <div class="tab-content ">
+            <div class="tab-pane card fade show active" id="overview">
+                <div class="row">
+                    <div class="col-12 pt-3" style="background-color: #fcdad3">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-2 col-md-2 col-sm-2 text-center">
+                                <h5> Total Users</h5>
+                                <div class="card mr-1">
+                                    <div class="card-body">
+                                        <h3>@Model.TotalUsers</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable1" width="100%" class="table table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane card fade" id="individual">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    @*<script src="~/js/pages/pages_users_list.js"></script>*@
+
+    @(Html.Ext().Grid<UsersOverviewViewModel>
+        ().Name("dataTable1")
+        .Columns(cols =>
+        {
+            cols.Add(c => c.Name).Title("Name").Orderable(false).Searchable(true);
+            cols.Add(c => c.Email).Title("Email");
+            cols.Add(c => c.MembershipDate).Title("Membership<br>Date");
+        })
+        .ServerSide(true)
+        //.Buttons(el =>
+        //{
+        //    el.Add("copy");
+        //    el.Add("excel");
+        //    el.Add("pdf");
+        //})
+        .AutoWidth(true)
+        .Info(true)
+        .PagingType(PagingType.Full_numbers)
+        .Processing(true)
+        .ScrollCollapse(true)
+        .ScrollX(true)
+        //.ScrollY(true)
+        .Searching(true)
+        //.Select(new SelectBuilder().Blurable(true))
+        .StateSave(true)
+        .DataSource(c => c.Ajax().Url(Url.Action("GetOverviewData")).Method("POST"))
+        )
+
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('#dataTable1').dataTable();
+            $("#searchbox").keyup(function () {
+                dataTable.fnFilter(this.value);
+            });
+        });
+    </script>
+}

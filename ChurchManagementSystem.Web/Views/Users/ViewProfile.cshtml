@@ -1,0 +1,58 @@
+﻿@model UserProfileViewModel
+@{
+    ViewData["Title"] = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="font-weight-bold py-3 mb-0">Profile View</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+        <li class="breadcrumb-item">Manage</li>
+        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item active">Profile View</li>
+    </ol>
+</div>
+
+<div class="media align-items-center py-3 mb-3">
+    <img src="~/img/avatars/5-small.png" alt="" class="d-block ui-w-100 rounded-circle">
+    <div class="media-body ml-4">
+        <h4 class="font-weight-bold mb-0">@Model.FirstName @Model.LastName</h4>
+        <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table user-view-table m-0">
+            <tbody>
+                <tr>
+                    <td>Email:</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>Role:</td>
+                    <td>@Model.RoleName</td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+
+                    @if (@Model.Active)
+                    {
+                        <td>
+                            <span class="badge badge-outline-success">Active</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span class="badge badge-outline-danger">InActive</span>
+                        </td>
+                    }
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@model EditUserProfileViewModel
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="font-weight-bold py-3 mb-0">Edit Profile</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item active">Edit user</li>
+    </ol>
+</div>
+<form method="post" asp-controller="User">
+    <div class="nav-tabs-top">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#user-edit-account">Account</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="user-edit-account">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                @if (!string.IsNullOrEmpty(ViewBag.Msg))
+                {
+                    <span class="text-danger">@ViewBag.Msg</span>
+                }
+                <hr class="border-light m-0">
+                <div class="card-body pb-2">
+                    <input hidden="true" name="id" value="@Model.Id"/>
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input name="FirstName" type="text" class="form-control mb-1" value="@Model.FirstName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input name="LastName" type="text" class="form-control" value="@Model.LastName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">E-mail</label>
+                        <input name="Email" type="text" class="form-control mb-1" value="@Model.Email">
+                    </div>
+                </div>
+                <hr class="border-light m-0">
+                <div class="card-body pb-2">
+                    <div class="form-group">
+                        <label class="col-form-label">User Role</label>
+                            <select class="custom-select" name="RoleId" asp-items="@(new SelectList(@ViewBag.ListofRoles, "RoleId", "RoleName"))"></select>
+                            <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select name="Active" class="custom-select">
+                            <option selected>Active</option>
+                            <option>Active</option>
+                            <option>InActive</option>
+                        </select>
+                    </div>
+
+                </div>
+                <hr class="border-light m-0">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="text-right mt-3">
+        <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChurchManagementSystem.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ChurchManagementSystem.API.Controllers.AccessController.SignIn(ChurchManagementSystem.Core.Features.Access.UserLoginRequest)">
+            <summary>
+            Endpoint that returns token object to login user.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.AccessController.SignOut(ChurchManagementSystem.Core.Features.Access.UserLogOutRequest)">
+            <summary>
+            Endpoint to sign out user
+            </summary>
+        </member>
+        <member name="T:ChurchManagementSystem.API.Controllers.RoleClaimController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.GetAllClaims">
+            <summary>
+            Gets a list of available claims
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.GetAllRoles">
+            <summary>
+            Gets a list of available roles
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.GetRole(System.Int32)">
+            <summary>
+            Gets a role and its claims by roleId.
+            </summary>
+            <param name="roleId">The id of the Role.</param>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.Post(ChurchManagementSystem.Core.Features.RolesClaims.AddRoleRequest)">
+            <summary>
+            Add a custom role and assign Claims to it.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.Edit(ChurchManagementSystem.Core.Features.RolesClaims.EditRoleRequest)">
+            <summary>
+            Updates a Role and its claims based on the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.RoleClaimController.DeleteRoles(System.Int32)">
+            <summary>
+            Delete roles
+            </summary>
+            <param name="roleId">The id of the Role.</param>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.UserProfileController.UserResetPassword(ChurchManagementSystem.Core.Features.UserProfile.UserResetPasswordRequest)">
+            <summary>
+            Changes the user's password based on the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.UserProfileController.UserForgotPassword(ChurchManagementSystem.Core.Features.UserProfile.UserForgotPasswordRequest)">
+            <summary>
+            Send TOken to Email for Forgotten password reset
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.UserProfileController.UserResetForgotPassword(ChurchManagementSystem.Core.Features.UserProfile.UserResetForgotPasswordRequest)">
+            <summary>
+            Reset user forgotten password with sent Email token which is part of the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Controllers.UserProfileController.ValidateToken(System.String)">
+            <summary>
+            Reset user forgotten password with sent Email token which is part of the data in the request.
+            </summary>
+        </member>
+        <member name="T:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.RoleId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.RoleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.UserId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ChurchManagementSystem.API.Security.ChurchManagementSystemClaimTypes.HasWebPortalAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ChurchManagementSystem.API.Security.ProfileService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Security.ProfileService.#ctor(ChurchManagementSystem.Core.Security.ILoginService,ChurchManagementSystem.Core.Logging.ILogger)">
+            <summary>
+            
+            </summary>
+            <param name="loginService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Security.ProfileService.GetProfileDataAsync(IdentityServer4.Models.ProfileDataRequestContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChurchManagementSystem.API.Security.ProfileService.IsActiveAsync(IdentityServer4.Models.IsActiveContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.GetAllUsers(ChurchManagementSystem.Core.Logic.Queries.PagedQueryRequest,System.String,System.String,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Gets a paged list of all Users.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.Post(ChurchManagementSystem.Core.Features.Users.AddUserRequest)">
+            <summary>                
+            Adds a User object based on the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.GetAllUsersName">
+            <summary>
+            Gets a list of all Users Name.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            Gets a User permit by id.
+            </summary>
+            <param name="id">The id of the User.</param>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.Edit(ChurchManagementSystem.Core.Features.Users.EditUserRequest)">
+            <summary>
+            Updates a User based on the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.EditUserByAdmin(ChurchManagementSystem.Core.Features.Users.EditUserByAdminRequest)">
+            <summary>
+            Updates a User based on the data in the request.
+            </summary>
+        </member>
+        <member name="M:ChurchManagementSystem.Api.Controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            Remove User
+            </summary>
+            <param name="userId">The unique identifier of the User</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<!-- [ Logo ] Start -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="ui-w-60">
+        <div class="w-100 position-relative">
+            <img src="~/img/logo-dark.png" alt="Brand Logo" class="img-fluid">
+        </div>
+    </div>
+</div>
+<!-- [ Logo ] End -->
+<!-- [ Form ] Start -->
+<form method="post" class="my-5">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <span class="text-danger">@ViewBag.Msg</span>
+    }
+
+    <div class="form-group">
+        <label class="form-label">Your name</label>
+        <input type="text" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Your email</label>
+        <input type="text" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-4">Register</button>
+   
+</form>
+<!-- [ Form ] End -->
+
+<div class="text-center text-muted">
+    Already have an account?
+    <a asp-action="Login" asp-controller="Accounts">Login</a>
+</div>
+

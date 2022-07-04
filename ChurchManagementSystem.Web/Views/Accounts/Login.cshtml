@@ -1,0 +1,111 @@
+﻿@*@model Feels.Services.Access.LoginDto*@
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<!-- [ Logo ] Start -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="ui-w-60">
+        <div class="w-100 position-relative">
+            <img src="~/img/feelsLogo.png" alt="Brand Logo" class="img-fluid">
+        </div>
+    </div>
+</div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=2070441116535138&autoLogAppEvents=1" nonce="PHFWrd8p"></script>
+<script>
+
+    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        console.log('statusChangeCallback');
+        console.log(response);                   // The current login status of the person.
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            testAPI();
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+            console.log('Code should not reach here')
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into this webpage.';
+        }
+    }
+
+
+    function checkLoginState() {               // Called when a person is finished with the Login Button.
+        console.log("Checking login state on click");
+        FB.getLoginStatus(function (response) {   // See the onlogin handler
+            if (response.status === 'connected') {
+                console.log(response.authResponse.accessToken);
+            }
+            statusChangeCallback(response);
+        });
+    }
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '2070441116535138',
+            cookie: true,                     // Enable cookies to allow the server to access the session.
+            xfbml: true,                     // Parse social plugins on this webpage.
+            version: 'v9.0'           // Use this Graph API version for this call.
+        });
+
+        console.log("FB window initialized");
+
+        FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+            statusChangeCallback(response);        // Returns the login status.
+        });
+    };
+
+    function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me?fields=email,name,birthday,hometown', function (response) {
+            console.log('Successful login for: ' + response.name);
+            str = JSON.stringify(response);
+            console.log('Full response ' + str);
+            document.getElementById('status').innerHTML =
+                'Thanks for logging in, ' + response.name + '!';
+        });
+    }
+
+</script>
+<!-- [ Logo ] End -->
+<!-- [ Form ] Start -->
+<form method="post" class="my-5">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <span class="text-danger">@ViewBag.Msg</span>
+    }
+    <div class="form-group">
+        <label class="form-label">Email</label>
+        <input name="Email" type="email" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="form-label d-flex justify-content-between align-items-end">
+            <span>Password</span>
+            <a asp-action="ForgotPassword" asp-controller="Accounts" class="d-block small">Forgot password?</a>
+        </label>
+        <input name="Password" type="password" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center m-0">
+        @*<label class="custom-control custom-checkbox m-0">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-label">Remember me</span>
+            </label>*@
+        <button type="submit" class="btn btn-primary">Login</button>
+        @* <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true"></div>*@
+        @* <div class="fb-login-button" data-width="10" data-size="small" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true"></div>*@
+        @*<div class="fb-login-button" data-width="10" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>*@
+        <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState()" data-width="10" data-size="medium" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true"></div>
+    </div>
+    <div id="status">
+    </div>
+</form>
+<!-- [ Form ] End -->
+
+<div class="text-center text-muted">
+    Don't have an account yet?
+    <a asp-action="Register" asp-controller="Accounts">Register</a>
+</div>
+
