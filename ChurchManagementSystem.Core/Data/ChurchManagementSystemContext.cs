@@ -21,7 +21,7 @@ namespace ChurchManagementSystem.Core.Data
      
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseNpgsql("Server=feels-dev.c1wuhlaxbxkb.us-east-1.rds.amazonaws.com;Database=postgres;Port=5432;User Id=master;Password=wGbFI515cn03;Pooling=true;MinPoolSize=1;MaxPoolSize=20;", x => x.UseNetTopologySuite());
+            
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.

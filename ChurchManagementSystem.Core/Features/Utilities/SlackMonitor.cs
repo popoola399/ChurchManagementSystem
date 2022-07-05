@@ -16,7 +16,7 @@ namespace ChurchManagementSystem.Core.Features.Utilities
                 {
                     var requestData = new StringContent($"{{'text':'{DateTime.Now} {message}'}}", Encoding.UTF8, "application/json");
 
-                    var response = await client.PostAsync($"https://hooks.slack.com/services/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", requestData);
+                    var response = await client.PostAsync($"https://hooks.slack.com", requestData);
 
                     var result = await response.Content.ReadAsStringAsync();
 
