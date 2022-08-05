@@ -1,4 +1,4 @@
- configuration: Release
+configuration: Release
  
  # restore NuGet packages before running  MSBuild
 before_build:
